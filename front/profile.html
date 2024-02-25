@@ -44,7 +44,7 @@
         const favoriteChampions = async(req, res) =>{
             event.preventDefault()
             let champions = document.querySelector('select').value;
-            await fetch('http://localhost:5000/user/favorite', {
+            await fetch('http://localhost:3000/user/favorite', {
                 method: 'PUT',
                 headers : {
                     'Content-Type': 'application/json',

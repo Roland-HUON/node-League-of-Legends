@@ -28,6 +28,11 @@
             })
         const sendChampion = async () => {
             event.preventDefault()
+            let token = localStorage.getItem('token');
+            if(!token){
+                window.location.href = 'login.html'; 
+                return;
+            }
             let champions = document.querySelector('input[name="champions"]').value;
             let type = document.querySelector('input[name="type"]').value;
             // console.log(champions, type);
