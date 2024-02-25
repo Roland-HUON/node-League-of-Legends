@@ -6,11 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Listes des Agents</h1>
+    <h1>Bienvenue sur League of Legends</h1>
+    <h2>Remplissez les champs afin d'ajouter de nouveaux champions !</h2>
     <div id="champions">
         <form>
-            <input type="text" name="champions">
-            <button onclick="sendChampion()">New Agent</button>
+            <input type="text" name="champions" placeholder="Nom du champion">
+            <input type="text" name="type" placeholder="Type du champion">
+            <button onclick="sendChampion()">New Champion</button>
         </form>
     </div>
     <script>
@@ -18,23 +20,25 @@
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                let champions = document.querySelector('#champions')
+                let champions = document.querySelector('#champions');
                 data.forEach(champions => {
                     champions.innerHTML += `
-                    <a href="champions.html?id=${champions.id}"><h2>${champions.name}</h2></a>
+                    <a href="champions.html?id=${champions.id}"><h2>${champions.name}</h2><p>${champions.type}</p></a>
                     `
                 });
             })
         const sendChampion = async () => {
+            event.preventDefault()
             let champions = document.querySelector('input[name="champions"]').value;
+            let type = document.querySelector('input[name="type"]').value;
             await fetch('http://localhost:5000/champions', {
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({name:champions})
+                body: JSON.stringify({name:champions, type:type})
             })
-            window.location.href = 'index.html'
+            window.location.href = 'index.html';
         }
     </script>
 </body>

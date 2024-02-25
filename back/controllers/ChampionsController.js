@@ -4,14 +4,17 @@ const prisma = new PrismaClient();
 
 const createChampions = (req, res) => {
     let champions = req.body;
+    if (!champions.name || !champions.type) {
+        return res.status(400).json({ error: 'name and type are required' });
+    }
     prisma.champions.create({
         data : {
             name : champions.name,
-            type : champions.type
+            type : champions.type,
         }
     })
-    .then((champion)=>{
-        res.json(champion);
+    .then((champions)=>{
+        res.json(champions);
     })
     .catch((error)=>{
         res.json(error);
