@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Listes des Agents</h1>
+    <div id="champions">
+        <form>
+            <input type="text" name="champions">
+            <button onclick="sendChampion()">New Agent</button>
+        </form>
+    </div>
+    <script>
+        fetch('http://localhost:3000/champions')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                let champions = document.querySelector('#champions')
+                data.forEach(champions => {
+                    champions.innerHTML += `
+                    <a href="champions.html?id=${champions.id}"><h2>${champions.name}</h2></a>
+                    `
+                });
+            })
+        const sendChampion = async () => {
+            let champions = document.querySelector('input[name="champions"]').value;
+            await fetch('http://localhost:5000/champions', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name:champions})
+            })
+            window.location.href = 'index.html'
+        }
+    </script>
+</body>
+</html>

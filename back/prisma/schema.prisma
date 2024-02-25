@@ -12,8 +12,8 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-model Agent {
+model Champions {
   id        Int      @id @default(autoincrement())
-  nom       String
+  name      String
   type      String
 }
