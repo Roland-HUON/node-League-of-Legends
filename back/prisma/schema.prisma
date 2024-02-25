@@ -9,6 +9,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+model Agent {
+  id        Int      @id @default(autoincrement())
+  nom       String
+  type      String
 }
