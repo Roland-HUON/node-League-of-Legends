@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node - LOL - Modify</title>
+</head>
+<body>
+    <form onsubmit="event.preventDefault(); updateChampions()">
+        <input type="text" name="champions">
+        <button type="submit">Update Champion</button>
+    </form>
+    <script>
+        let url = window.location.search;
+        let id = new URLSearchParams(url).get('id');
+
+        fetch(`http://localhost:3000/champions/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                let champions = document.querySelector('input[name="champions"]');
+                champions.value = data.name;
+            })
+            
+        const updateChampions = async() =>{
+            event.preventDefault()
+            let champions = document.querySelector('input[name="champions"]').value;
+            let response = await fetch(`http://localhost:3000/champions/${id}`, {
+                method:'PUT',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name: champions})
+            })
+            window.location.href = 'index.html'
+        }
+
+    </script>
+</body>
+</html>

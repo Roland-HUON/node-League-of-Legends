@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Node - LOL</title>
 </head>
 <body>
     <h1>Bienvenue sur League of Legends</h1>
@@ -19,7 +19,6 @@
         fetch('http://localhost:3000/champions')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 let champions = document.querySelector('#champions');
                 data.forEach(champions => {
                     champions.innerHTML += `
