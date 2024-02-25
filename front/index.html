@@ -31,7 +31,8 @@
             event.preventDefault()
             let champions = document.querySelector('input[name="champions"]').value;
             let type = document.querySelector('input[name="type"]').value;
-            await fetch('http://localhost:5000/champions', {
+            // console.log(champions, type);
+            await fetch('http://localhost:3000/champions', {
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'

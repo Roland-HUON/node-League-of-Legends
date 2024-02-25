@@ -16,4 +16,15 @@ model Champions {
   id        Int      @id @default(autoincrement())
   name      String
   type      String
+  users     User[]
+}
+model User {
+  id            Int           @id @default(autoincrement())
+  pseudo        String
+  email         String        @unique
+  password      String
+  champions     Champions?    @relation(fields:[championsId], references: [id])
+  championsId   Int?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
